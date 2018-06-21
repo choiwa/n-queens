@@ -177,7 +177,7 @@
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -187,11 +187,33 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.rows();
+      var col = minorDiagonalColumnIndexAtFirstRow;
+      var count = 0;
+
+      for (var row = 0; row < rows.length; row++) {
+        if (rows[row][col] === 1) {
+          count++;
+        }
+
+        if (count > 1) {
+          return true;
+        }
+        col--;
+      }
+
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var rows = this.rows();
+
+      for (var col = rows.length * 2; col > 0; col--) {
+        if (this.hasMinorDiagonalConflictAt(col)) {
+          return true;
+        }
+      }
       return false; // fixme
     }
 
